@@ -1,33 +1,54 @@
-import { Grid, GridItem } from "@chakra-ui/react";
+import { Grid, GridItem, Box } from "@chakra-ui/react";
 import Header from "../components/Header";
 import Routing from "../routes/routing";
+import fondo2 from "../assets/fondo2.png";
+import Footer from "../components/Footer";
 
 const AppLayout = () => {
   return (
     <Grid
-      templateAreas={`"header"
-                      "main"
-                      "footer"`}
-      gridTemplateRows={"150px 1fr 50px"}
+      templateAreas={`"header" "main" "footer"`}
+      gridTemplateRows={"100px 1fr auto"}
       gridTemplateColumns={"1fr"}
       fontWeight="bold"
-      minHeight="100vh">
-      {/* header */}
-      <GridItem
-        area="header"
-        bg="custom.200"
-        background="linear-gradient(to right, #B10F2E, #570000)">
+      minHeight="100vh"
+      bgImage={`url(${fondo2})`}
+      overflow="hidden"
+      bgSize="cover"
+      bgPosition="center"
+      bgRepeat="no-repeat"
+      position="relative">
+      {/* Overlay oscuro */}
+      <Box
+        position="absolute"
+        top="0"
+        left="0"
+        right="0"
+        bottom="0"
+        bg="blackAlpha.600"
+        backdropFilter="blur(3px)"
+        zIndex="1"
+      />
+
+      {/* Header */}
+      <GridItem area="header" position="relative" zIndex="2">
         <Header />
       </GridItem>
 
-      {/* main */}
+      {/* Main */}
       <GridItem
         area="main"
         minH="100vh"
-        bg="transparent"
         display="flex"
-        flexDirection="column">
+        flexDirection="column"
+        position="relative"
+        zIndex="2">
         <Routing />
+      </GridItem>
+
+      {/* Footer */}
+      <GridItem area="footer" zIndex="2">
+        <Footer />
       </GridItem>
     </Grid>
   );
